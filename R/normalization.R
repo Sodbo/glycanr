@@ -162,6 +162,8 @@ mediannorm_groups = function(d) {
 #' @export medianquotientnorm
 #' @param d data frame in long format containing glycan measurements
 #' @param grouping should data be normalized per groups
+#' @param control list of gids should be used to estimate reference spectra.
+#' Control gids are recommended to be used.
 #' @return Returns a data.frame with original glycan values substituted by normalized ones
 #' @details
 #' Input data frame should have at least the following three columns: \cr
@@ -180,19 +182,26 @@ mediannorm_groups = function(d) {
 #' data(mpiu)
 #' mpiun <- medianquotientnorm(mpiu)
 #' head(mpiun)
-medianquotientnorm <- function(d, grouping=FALSE){
+medianquotientnorm <- function(d, grouping=FALSE, control=NULL){
     if(grouping==FALSE){
-        return(medianquotientnorm_basic(d))
+        return(medianquotientnorm_basic(d, control))
     }else{
-        return(medianquotientnorm_groups(d))
+        return(medianquotientnorm_groups(d, control))
     }
 }
 
-medianquotientnorm_basic <- function(d){
-    ref_chromx <- d %>% 
-        dplyr::group_by(glycan) %>% 
-        dplyr::mutate(mxxx=value/stats::median(value, na.rm=TRUE)) %>% 
-        dplyr::ungroup()
+medianquotientnorm_basic <- function(d, control){
+    if(is.null(control)){
+        ref_chromx <- d %>% 
+            dplyr::group_by(glycan) %>% 
+            dplyr::mutate(mxxx=value/stats::median(value, na.rm=TRUE)) %>% 
+            dplyr::ungroup()
+    } else {
+        ref_chromx <- d %>%                                                         
+            dplyr::group_by(glycan) %>%                                             
+            dplyr::mutate(mxxx=value/stats::median(value[gid %in% control], na.rm=TRUE)) %>%          
+            dplyr::ungroup()
+    }
 
     d <- ref_chromx %>% 
         dplyr::group_by(gid) %>% 
@@ -203,10 +212,10 @@ medianquotientnorm_basic <- function(d){
     d
 }
 
-medianquotientnorm_groups <- function(d){
+medianquotientnorm_groups <- function(d, control){
     d <- d %>% 
         dplyr::group_by(groups) %>% 
-        dplyr::do(medianquotientnorm_basic(.)) %>% 
+        dplyr::do(medianquotientnorm_basic(., control)) %>% 
         dplyr::ungroup()
 
     d

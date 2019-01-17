@@ -4,12 +4,15 @@
 \alias{medianquotientnorm}
 \title{Median Quotient Normalization of glycan data}
 \usage{
-medianquotientnorm(d, grouping = FALSE)
+medianquotientnorm(d, grouping = FALSE, control = NULL)
 }
 \arguments{
 \item{d}{data frame in long format containing glycan measurements}
 
 \item{grouping}{should data be normalized per groups}
+
+\item{control}{list of gids should be used to estimate reference spectra.
+Control gids are recommended to be used.}
 }
 \value{
 Returns a data.frame with original glycan values substituted by normalized ones

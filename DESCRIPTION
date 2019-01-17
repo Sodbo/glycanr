@@ -1,6 +1,6 @@
 Package: glycanr
 Title: Tools for Analysing N-Glycan Data
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
 	person("Ivo", "Ugrina", role=c("aut", "cre", "cph"),
 		email="ivougrina@gmail.com"),
@@ -16,21 +16,19 @@ Description: Useful utilities in N-glycan data analysis. This package tries
     to data obtained by UPLC (Ultra Performance Liquid Chromatography)
     and LCMS (Liquid chromatography–mass spectrometry)
     analysis of Plasma and IgG glycome.
-Depends:
-    R (>= 3.1.2)
-Imports:
-    ggplot2,
-    tidyr (>= 0.3.1),
-    dplyr (>= 0.4.3),
-    coin
+Depends: R (>= 3.1.2)
+Imports: ggplot2, tidyr (>= 0.3.1), dplyr (>= 0.4.3), coin
 License: MIT + file LICENSE
 LazyData: true
-Suggests:
-    knitr,
-    preprocessCore,
-    testthat
+Suggests: knitr, preprocessCore, testthat
 VignetteBuilder: knitr
 URL: https://github.com/iugrina/glycanr
 BugReports: https://github.com/iugrina/glycanr/issues
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2019-01-17 10:05:06 UTC; sodbo
+Author: Ivo Ugrina [aut, cre, cph],
+  Lucija Klaric [aut],
+  Alyce Russell [aut],
+  Frano Vuckovic [aut]

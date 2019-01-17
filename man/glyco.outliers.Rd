@@ -4,7 +4,8 @@
 \alias{glyco.outliers}
 \title{Discover outliers in glycan data}
 \usage{
-glyco.outliers(data, group = NULL, outlier.function = NULL, alpha = 1.5)
+glyco.outliers(data, group = NULL, outlier.function = NULL,
+  alpha = 1.5)
 }
 \arguments{
 \item{data}{data frame in long format containing glycan measurements}
